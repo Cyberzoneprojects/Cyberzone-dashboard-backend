@@ -1,29 +1,39 @@
 const mongoose = require('mongoose')
 
 const moduleSchema = new mongoose.Schema({
-    modID: {
-        type: String,
-        index: { unique: true }
-    },
-    serviceID: String,
-    name: String,
-    title:String
-    // timePassed: {
-    //     type: Number,
-    //     trim: true,
-    //     require: true,
-    // },
-    // score: {
-    //     type: Number,
-    //     trim: true,
-    //     require: true,
-    // },
-    // image: {
-    //     type: Number,
-    //     trim: true,
-    //     require: true,
-    // }
     
+    moduleID: {
+        type: String,
+        require: true,
+        index:{unique: true}
+    },
+    name: {
+        type: String,
+        trim: true,
+        require: true,
+        maxlength: 60
+    },
+    title: {
+        type: String,
+        trim: true,
+        require: true,
+        maxlength: 90
+    },
+    timePassed: {
+        type: Number,
+        trim: true,
+        require: true,
+    },
+    score: {
+        type: Number,
+        trim: true,
+        require: true,
+    },
+    image: {
+        type: String,
+        trim: true,
+        require: true,
+    }
 });
 
 // virtual field

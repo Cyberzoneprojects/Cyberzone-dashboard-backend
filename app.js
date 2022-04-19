@@ -3,7 +3,8 @@ require('dotenv').config();
 
 const mongoose = require('mongoose');
 // import Router
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/modul');
+const modulRoute = require('./routes/modul');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -31,6 +32,8 @@ const cors=require("cors");
 app.use(cors())
 // routes middleware
 app.use('/api', userRoutes); 
+
+app.use('/api', modulRoute); 
 
 const port = process.env.PORT||8000
 

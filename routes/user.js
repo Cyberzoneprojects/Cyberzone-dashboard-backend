@@ -1,27 +1,27 @@
-const express = require('express')
+// const express = require('express')
 
-const router = express.Router()
-
-
-const modulContrl = require('../controllers/user')
-router.post('/signup', signup)
+// const router = express.Router()
 
 
-router.get('/signup', modulContrl.getModules)
+// const modulContrl = require('../controllers/user')
+// router.post('/signup', signup)
 
-module.exports = router;
+
+// router.get('/signup', modulContrl.getModules)
+
+// module.exports = router;
 
 
-// let userSchema = require("../models/user");
+// // let userSchema = require("../models/user");
   
-// // CREATE Student
-// router.post("/signup", (req, res, next) => {
-//   userSchema.create(req.body, (error, data) => {
-//     if (error) {
-//       return next(error);
-//     } else {
-//       console.log(data);
-//       res.json(data);
-//     }
-//   });
-// });
+// // // CREATE Student
+// // router.post("/signup", (req, res, next) => {
+// //   userSchema.create(req.body, (error, data) => {
+// //     if (error) {
+// //       return next(error);
+// //     } else {
+// //       console.log(data);
+// //       res.json(data);
+// //     }
+// //   });
+// // });

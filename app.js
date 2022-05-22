@@ -1,5 +1,8 @@
 const express = require('express');
 require('dotenv').config();
+const authRoutes = require("./routes/AuthRoutes");
+const cookieParser = require("cookie-parser");
+
 
 const mongoose = require('mongoose');
 // import Router
@@ -7,7 +10,6 @@ const userRoutes = require('./routes/modul');
 const modulRoute = require('./routes/modul');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 // const 
 // appp
 const app = express()
@@ -16,7 +18,12 @@ const app = express()
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
     // useCreateIndex: true,
-}).then(()=> console.log('DB connected'))
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log('DB connected');
+}).catch(err=>{
+    console.log(err.message);
+})
 
 // middlewares
 
@@ -29,7 +36,7 @@ app.use(cookieParser())
 const cors=require("cors");
 
 
-app.use(cors())
+// app.use(cors())
 // routes middleware
 app.use('/api', userRoutes); 
 
@@ -41,7 +48,18 @@ app.listen(port, ()=>{
     console.log(`Server running at ${port}`)
 })
 
+app.use(
+    cors({
+        origin: ["http://localhost:3001"],
+        method: ["GET","POST"],
+        credentials: true,
+    })
+);
 
+app.use(cookieParser());
+
+app.use(express.json());
+app.use("/", authRoutes);
 
 // Setup for starting the mongod service
 

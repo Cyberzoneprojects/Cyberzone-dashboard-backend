@@ -1,9 +1,9 @@
-const Modules = require('../models/modul')
+const Resources = require('../models/resource.model')
 
-saveModul = (req, res) =>{
+saveRes = (req, res) =>{
     console.log("req.body", req.body)
-    const modul = new Modules(req.body)
-    modul.save(modul
+    const reso = new Resources(req.body)
+    reso.save(res
         // if(err){
         //     return res.status(400).json({
         //         err
@@ -17,12 +17,12 @@ saveModul = (req, res) =>{
 
 
 
-getModuls = async (req, res) => {
-    await Modules.find({}, (err, moduls) => {
+getRes = async (req, res) => {
+    await Resources.find({}, (err, reso) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
-        if (!moduls.length) {
+        if (!reso.length) {
             return res
                 .status(404)
                 .json({ success: false, error: `users not found` })
@@ -31,9 +31,9 @@ getModuls = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
-const deleteModul = (req, res, next) => {
+const deleteRes = (req, res, next) => {
   console.log(req.params.id)
-  Modules.findByIdAndRemove(
+  Resources.findByIdAndRemove(
       req.params.id, (error, data) => {
     if (error) {
       return next(error);
@@ -47,9 +47,9 @@ const deleteModul = (req, res, next) => {
 
 // // UPDATE student
 
-  const updateModule = (req, res, next)=> {
+  const updateRes = (req, res, next)=> {
     console.log(req.body)
-    Modules.findByIdAndUpdate(
+    Resources.findByIdAndUpdate(
       req.params.id,
       {
         $set: {...req.body},
@@ -60,7 +60,7 @@ const deleteModul = (req, res, next) => {
         } else {
           console.log(data)
           res.json(data);
-          console.log("Module updated successfully !");
+          console.log("Resource updated successfully !");
           // console.log(res.json(data).body)
         }
       }
@@ -70,8 +70,8 @@ const deleteModul = (req, res, next) => {
 
 
 module.exports = {
-    saveModul,
-    getModuls,
-    deleteModul,
-    updateModule
+    saveRes,
+    getRes,
+    deleteRes,
+    updateRes
 }

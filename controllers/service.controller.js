@@ -1,9 +1,9 @@
-const Modules = require('../models/modul')
+const Services = require('../models/service.model')
 
-saveModul = (req, res) =>{
+saveService = (req, res) =>{
     console.log("req.body", req.body)
-    const modul = new Modules(req.body)
-    modul.save(modul
+    const service = new Services(req.body)
+    service.save(service
         // if(err){
         //     return res.status(400).json({
         //         err
@@ -17,23 +17,23 @@ saveModul = (req, res) =>{
 
 
 
-getModuls = async (req, res) => {
-    await Modules.find({}, (err, moduls) => {
+getServices = async (req, res) => {
+    await Services.find({}, (err, service) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
-        if (!moduls.length) {
+        if (!service.length) {
             return res
                 .status(404)
-                .json({ success: false, error: `users not found` })
+                .json({ success: false, error: `services not found` })
         }
-        return res.status(200).json({ success: true, data: moduls })
+        return res.status(200).json({ success: true, data: service })
     }).catch(err => console.log(err))
 }
 
-const deleteModul = (req, res, next) => {
+const deleteService = (req, res, next) => {
   console.log(req.params.id)
-  Modules.findByIdAndRemove(
+  Services.findByIdAndRemove(
       req.params.id, (error, data) => {
     if (error) {
       return next(error);
@@ -47,9 +47,9 @@ const deleteModul = (req, res, next) => {
 
 // // UPDATE student
 
-  const updateModule = (req, res, next)=> {
+  const updateService = (req, res, next)=> {
     console.log(req.body)
-    Modules.findByIdAndUpdate(
+    Services.findByIdAndUpdate(
       req.params.id,
       {
         $set: {...req.body},
@@ -60,7 +60,7 @@ const deleteModul = (req, res, next) => {
         } else {
           console.log(data)
           res.json(data);
-          console.log("Module updated successfully !");
+          console.log("Service updated successfully !");
           // console.log(res.json(data).body)
         }
       }
@@ -70,8 +70,8 @@ const deleteModul = (req, res, next) => {
 
 
 module.exports = {
-    saveModul,
-    getModuls,
-    deleteModul,
-    updateModule
+    saveService,
+    getServices,
+    deleteService,
+    updateService
 }

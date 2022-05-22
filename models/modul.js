@@ -29,6 +29,7 @@ const moduleSchema = new mongoose.Schema({
         trim: true,
         require: true,
     },
+    
     image: {
         type: String,
         trim: true,

@@ -7,11 +7,12 @@ const mongoose = require('mongoose');
 const modulRoute = require('./routes/modul');
 const servicesRoute = require('./routes/services.route')
 const resourceRoute = require('./routes/resource.route');
+const unitRoutes = require('./routes/units.routes');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const multer  = require('multer')
+// const multer  = require('multer')
 // const 
 // appp
 const app = express()
@@ -25,24 +26,24 @@ mongoose.connect(process.env.DATABASE, {
 
 
 // setup multer for file upload
-var storage = multer.diskStorage(
-    {
-        destination: '../../',
-        filename: function (req, file, cb ) {
-            cb( null, file.originalname);
-        }
-    }
-);
-const upload = multer({ storage: storage } )
-app.use(express.json());
-// serving front end build files
-app.use(express.static(__dirname + "/../build"));
+// var storage = multer.diskStorage(
+//     {
+//         destination: '../../',
+//         filename: function (req, file, cb ) {
+//             cb( null, file.originalname);
+//         }
+//     }
+// );
+// const upload = multer({ storage: storage } )
+// app.use(express.json());
+// // serving front end build files
+// app.use(express.static(__dirname + "/../build"));
 
-// route for file upload
-app.post("/api/uploadfile", upload.single('myFile'), (req, res, next) => {
-    console.log(req.file.originalname + " file successfully uploaded !!");
-    res.sendStatus(200);
-});
+// // route for file upload
+// app.post("/api/uploadfile", upload.single('myFile'), (req, res, next) => {
+//     console.log(req.file.originalname + " file successfully uploaded !!");
+//     res.sendStatus(200);
+// });
 
 
 
@@ -64,6 +65,7 @@ app.use(cors())
 app.use('/api', modulRoute); 
 app.use('/api', servicesRoute);
 app.use('/api', resourceRoute);
+app.use('/api', unitRoutes);
 
 
 const port = process.env.PORT||8000

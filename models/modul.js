@@ -7,11 +7,14 @@ const moduleSchema = new mongoose.Schema({
         require: true,
         index:{unique: true}
     },
+    serviceID: {
+        type: String,
+        require: true,
+    },
     name: {
         type: String,
         trim: true,
         require: true,
-        maxlength: 60
     },
     title: {
         type: String,

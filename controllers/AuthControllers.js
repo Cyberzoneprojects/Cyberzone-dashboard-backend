@@ -3,19 +3,33 @@ const jwt = require("jsonwebtoken");
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({ id }, "kishan sheth super secret key", {
+  return jwt.sign({ id }, "super secret key", {
     expiresIn: maxAge,
   });
 };
 
 const handleErrors = (err) => {
-  let errors = { email: "", password: "" };
+  let errors = {firstName: "", lastName: "", gender: "", country: "", phone: "", email: "", password: "" };
 
   console.log(err);
+  if (err.message === "incorrect firstName") {
+    errors.firstName = "First Name is not registered";
+  }
+  if (err.message === "incorrect lastName") {
+    errors.lastName = "Last Name is not registered";
+  }
+  if (err.message === "incorrect gender") {
+    errors.gender = "Gender is not incorrect";
+  }
+  if (err.message === "incorrect country") {
+    errors.country = "Country is not incorrect";
+  }
+  if (err.message === "incorrect phone number") {
+    errors.phone = "This phone number is not registered";
+  }
   if (err.message === "incorrect email") {
     errors.email = "That email is not registered";
   }
-
   if (err.message === "incorrect password") {
     errors.password = "That password is incorrect";
   }
@@ -36,8 +50,8 @@ const handleErrors = (err) => {
 
 module.exports.register = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.create({ email, password });
+    const {firstName, lastName, gender, country, phone, email, password } = req.body;
+    const user = await User.create({ firstName, lastName, gender, country, phone, email, password });
     const token = createToken(user._id);
 
     res.cookie("jwt", token, {

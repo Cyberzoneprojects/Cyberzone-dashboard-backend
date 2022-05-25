@@ -1,7 +1,33 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+
 const userSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: [true, "First Name is Required"],
+    unique: true,
+  },
+  lastName: {
+    type: String,
+    required: [true, "Last Name is Required"],
+    unique: true,
+  },
+  country: {
+    type: String,
+    required: [true, "Country is Required"],
+    unique: true,
+  },
+  gender: {
+    type: String,
+    required: [true, "Gender is Required"],
+    unique: true,
+  },
+  phone: {
+    type: String,
+    required: [true, "Phone Number is Required"],
+    unique: true,
+  },
   email: {
     type: String,
     required: [true, "Email is Required"],
